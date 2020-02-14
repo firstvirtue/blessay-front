@@ -17,7 +17,8 @@
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-pender": "^2.0.12",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "validator": "^12.2.0"
   },
   "scripts": {
     "start": "NODE_PATH=src react-scripts start",
