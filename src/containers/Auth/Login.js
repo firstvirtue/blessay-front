@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from 'components/Auth';
+import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from 'components/Auth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from 'redux/modules/auth';
+import * as userActions from 'redux/modules/user';
+import storage from 'lib/storage';
 
 class Login extends Component {
+  setError = (message) => {
+    const { AuthActions } = this.props;
+    AuthActions.setError({
+      form: 'login',
+      message
+    });
+  }
+
   componentWillUnmount() {
     const { AuthActions } = this.props;
     AuthActions.initializeForm('login');
@@ -21,9 +31,30 @@ class Login extends Component {
     });
   }
 
+  handleLocalLogin = async () => {
+    const { form, AuthActions, UserActions, history } = this.props;
+    const { email, password } = form.toJS();
+
+    try {
+      await AuthActions.localLogin({email, password});
+      const loggedInfo = this.props.result.toJS();
+
+      UserActions.setLoggedInfo(loggedInfo);
+      history.push('/');
+      storage.set('loggedInfo', loggedInfo);
+
+    } catch (e) {
+      console.log(e);
+      this.setError('잘못된 계정 정보입니다.');
+    }
+  }
+
   render() {
     const { email, password } = this.props.form.toJS(); // form 에서 값을 읽어옴
-    const { handleChange } = this;
+    const { handleChange, handleLocalLogin } = this;
+    const { error } = this.props;
+
+    console.log(error);
 
     return (
       <AuthContent title="로그인">
@@ -42,7 +73,10 @@ class Login extends Component {
           value={password} 
           onChange={handleChange}
         />
-        <AuthButton>로그인</AuthButton>
+        {
+          error && <AuthError>{error}</AuthError>
+        }
+        <AuthButton onClick={handleLocalLogin}>로그인</AuthButton>
         <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
       </AuthContent>
     );
@@ -51,9 +85,12 @@ class Login extends Component {
 
 export default connect(
   (state) => ({
-    form: state.auth.getIn(['login', 'form'])
+    form: state.auth.getIn(['login', 'form']),
+    error: state.auth.getIn(['login', 'error']),
+    result: state.auth.get('result')
   }),
   (dispatch) => ({
-    AuthActions: bindActionCreators(authActions, dispatch)
+    AuthActions: bindActionCreators(authActions, dispatch),
+    UserActions: bindActionCreators(userActions, dispatch)
   })
 )(Login);

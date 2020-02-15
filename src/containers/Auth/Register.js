@@ -115,6 +115,7 @@ class Register extends Component {
       });
       const loggedInfo = this.props.result.toJS();
       
+      storage.set('loggedInfo', loggedInfo);
       UserActions.setLoggedInfo(loggedInfo);
       UserActions.setValidated(true);
       history.push('/');
@@ -133,9 +134,11 @@ class Register extends Component {
     const { email, username, password, passwordConfirm } = this.props.form.toJS();
     const { handleChange, handleLocalRegister } = this;
 
+    console.log(error);
+
     return (
       <AuthContent title="회원가입">
-        <InputWithLabel 
+        <InputWithLabel
           label="이메일" 
           name="email" 
           placeholder="이메일"
