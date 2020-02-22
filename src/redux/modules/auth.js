@@ -70,11 +70,11 @@ export default handleActions({
     onSuccess: (state, action) => state.setIn(['register', 'exists', 'username'], action.payload.data.exists)
   }),
   ...pender({
-    type: LOCAL_REGISTER,
+    type: LOCAL_LOGIN,
     onSuccess: (state, action) => state.set('result', Map(action.payload.data))
   }),
   ...pender({
-    type: LOCAL_LOGIN,
+    type: LOCAL_REGISTER,
     onSuccess: (state, action) => state.set('result', Map(action.payload.data))
   }),
   [SET_ERROR]: (state, action) => {

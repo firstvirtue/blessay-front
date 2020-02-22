@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import penderMiddleware from 'redux-pender';
 import modules from './modules';
-import { pender } from 'redux-pender/lib/utils';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const composeEnhancers = isDevelopment ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose;

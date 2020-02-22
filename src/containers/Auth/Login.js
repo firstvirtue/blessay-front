@@ -13,6 +13,7 @@ class Login extends Component {
       form: 'login',
       message
     });
+    return false;
   }
 
   componentWillUnmount() {
@@ -39,9 +40,11 @@ class Login extends Component {
       await AuthActions.localLogin({email, password});
       const loggedInfo = this.props.result.toJS();
 
+      console.log(loggedInfo);
+
       UserActions.setLoggedInfo(loggedInfo);
-      history.push('/');
       storage.set('loggedInfo', loggedInfo);
+      history.push('/');
 
     } catch (e) {
       console.log(e);
@@ -53,8 +56,6 @@ class Login extends Component {
     const { email, password } = this.props.form.toJS(); // form 에서 값을 읽어옴
     const { handleChange, handleLocalLogin } = this;
     const { error } = this.props;
-
-    console.log(error);
 
     return (
       <AuthContent title="로그인">
