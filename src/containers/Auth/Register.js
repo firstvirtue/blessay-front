@@ -158,6 +158,7 @@ class Register extends Component {
           label="비밀번호" 
           name="password" 
           placeholder="비밀번호"
+          type="password" 
           value={password} 
           onChange={handleChange}
         />
@@ -165,6 +166,7 @@ class Register extends Component {
           label="비밀번호 확인" 
           name="passwordConfirm" 
           placeholder="비밀번호 확인"
+          type="password" 
           value={passwordConfirm} 
           onChange={handleChange}
         />
