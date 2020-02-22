@@ -114,8 +114,6 @@ class Register extends Component {
         email, username, password
       });
       const loggedInfo = this.props.result.toJS();
-
-      console.log(loggedInfo);
       
       storage.set('loggedInfo', loggedInfo);
       UserActions.setLoggedInfo(loggedInfo);
