@@ -12,6 +12,7 @@ const CHECK_USERNAME_EXISTS = 'auth/CHECK_USERNAME_EXISTS';
 const LOCAL_REGISTER = 'auth/LOCAL_REGISTER';
 const LOCAL_LOGIN = 'auth/LOCAL_LOGIN';
 
+const CHECK_STATUS = 'auth/CHECK_STATUS';
 const LOGOUT = 'auth/LOGOUT';
 
 const SET_ERROR = 'auth/SET_ERROR'; // 오류 설정
@@ -25,6 +26,7 @@ export const checkUsernameExists = createAction(CHECK_USERNAME_EXISTS, AuthAPI.c
 export const localRegister = createAction(LOCAL_REGISTER, AuthAPI.localRegister);
 export const localLogin = createAction(LOCAL_LOGIN, AuthAPI.localLogin);
 
+export const checkStatus = createAction(CHECK_STATUS, AuthAPI.checkStatus);
 export const logout = createAction(LOGOUT, AuthAPI.logout);
 
 export const setError = createAction(SET_ERROR); // { form, message }
