@@ -134,8 +134,6 @@ class Register extends Component {
     const { email, username, password, passwordConfirm } = this.props.form.toJS();
     const { handleChange, handleLocalRegister } = this;
 
-    console.log(error);
-
     return (
       <AuthContent title="회원가입">
         <InputWithLabel
