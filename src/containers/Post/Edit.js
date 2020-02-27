@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { PostWrapper, RouteLink } from 'components/Post';
 
 class Edit extends Component {
 
   render() {
 
     return (
-      <div>
+      <PostWrapper>
         
-        EDIT
-      </div>
+      </PostWrapper>
     );
   }
 }

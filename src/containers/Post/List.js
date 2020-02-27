@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { PostWrapper, RouteLink, PostLink } from 'components/Post';
 
 class List extends Component {
 
@@ -32,16 +33,21 @@ class List extends Component {
     articleList = items.map(
       (article, index) => (
         <li key={index}>
-          {article.id}
+          <PostLink to={`/post/view?id=${article.id}`}>
+            <h2>{article.title}</h2>
+            {article.description}
+          </PostLink>
         </li>
       )
     )
 
     return (
-      
-      <ul>
-        {articleList}
-      </ul>
+      <PostWrapper>
+        <RouteLink to="/post/edit">글쓰기</RouteLink>
+        <ul>
+          {articleList}
+        </ul>
+      </PostWrapper>
     );
   }
 }
