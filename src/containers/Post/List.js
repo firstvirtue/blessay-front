@@ -28,15 +28,17 @@ class List extends Component {
 
   render() {
     const { items } = this.state;
-    let articleList; 
+    let articleList;
     articleList = items.map(
       (article, index) => (
-        <li>
+        <li key={index}>
           {article.id}
         </li>
       )
     )
+
     return (
+      
       <ul>
         {articleList}
       </ul>

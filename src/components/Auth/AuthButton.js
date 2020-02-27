@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow } from 'lib/styleUtils';
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   margin-top: 1rem;
   padding-top: 0.6rem;
   padding-bottom: 0.5rem;
+  width: 100%;
 
+  border: 0;
   background: ${oc.teal[6]};
   color: white;
 
@@ -30,7 +32,7 @@ const Wrapper = styled.div`
 `;
 
 const AuthButton = ({children, onClick}) => (
-  <Wrapper onClick={onClick}>
+  <Wrapper type="submit" onClick={onClick}>
     {children}
   </Wrapper>
 );
