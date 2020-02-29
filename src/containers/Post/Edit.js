@@ -21,10 +21,38 @@ class Edit extends Component {
   handleSave = async () => {
     // this.editor.focus();
 
-    this.editor.save().then((outputData) => {
-      // console.log(outputData);
-      console.log(this.state);
-      // axios.post('/api/posts/', )
+    await this.editor.save().then((outputData) => {
+      console.log(outputData);
+      const { storedTitle } = this.state;
+      const { history } = this.props;
+
+      const blocks = [];
+
+      outputData.blocks.forEach(el => {
+
+        const item = {
+          content: JSON.stringify(el.data),
+          created_on: new Date().toISOString(),
+          updated_on: new Date().toISOString()
+        }
+        blocks.push(item);
+      });
+
+      const data = {
+        title: storedTitle,
+        blocks: blocks
+      }
+
+      console.log(data);
+
+      axios.post('/api/posts/', data).then((e) => {
+        console.log(e);
+        history.push('/post/list');
+
+      }).catch((e) => {
+        console.log(e);
+      });
+
     }).catch((e) => {
       console.log(e);
     });
@@ -40,8 +68,6 @@ class Edit extends Component {
   render() {
     const { handleSave, handleChange } = this;
     const { title } = this.state;
-
-    console.log(title);
 
     return (
       <PostWrapper>
