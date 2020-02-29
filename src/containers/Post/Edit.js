@@ -7,19 +7,67 @@ class Edit extends Component {
   constructor(props) {
     super(props);
 
+    const urlParams = new URLSearchParams(window.location.search);
+
     this.state = {
       title: '',
-      storedTitle: ''
+      storedTitle: '',
+      param: urlParams.get('id')
     }
 
-    this.editor = new EditorJS({
-      holderId: 'container',
-      // autofocus: true,
-    });
+    // console.log(this.state);
+  }
+
+  componentDidMount() {
+
+    const { param } = this.state;
+    
+    if(param) {
+      axios.get('/api/posts/' + param)
+        .then(res => {
+
+          // console.log(res.data);
+          this.setState({
+            title: res.data.title,
+            storedTitle: res.data.title
+          });
+
+          const data = {
+            blocks: []
+          }
+
+          res.data.blocks.forEach(el => {
+            
+            let item = {
+              type: el.type,
+              data: {
+                text: el.content
+              }
+            };
+            
+            data.blocks.push(item);
+          })
+
+          this.editor = new EditorJS({
+            holderId: 'container',
+            // autofocus: true,
+            data: data
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    } else {
+      this.editor = new EditorJS({
+        holderId: 'container',
+        // autofocus: true,
+      });
+    }
   }
 
   handleSave = async () => {
     // this.editor.focus();
+    const { param } = this.state;
 
     await this.editor.save().then((outputData) => {
       console.log(outputData);
@@ -47,13 +95,21 @@ class Edit extends Component {
 
       console.log(data);
 
-      axios.post('/api/posts/', data).then((e) => {
-        console.log(e);
-        history.push('/post/list');
-
-      }).catch((e) => {
-        console.log(e);
-      });
+      if(param) {
+        axios.patch('/api/posts/' + param, data).then((e) => {
+          history.push('/post/list');
+  
+        }).catch((e) => {
+          console.log(e);
+        });
+      } else {
+        axios.post('/api/posts/', data).then((e) => {
+          history.push('/post/list');
+  
+        }).catch((e) => {
+          console.log(e);
+        });
+      }
 
     }).catch((e) => {
       console.log(e);

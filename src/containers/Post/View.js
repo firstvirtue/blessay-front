@@ -55,7 +55,7 @@ class View extends Component {
 
     return (
       <PostWrapper>
-        <RouteLink to="/post/edit">수정</RouteLink>
+        <RouteLink to={`/post/edit?id=${article.id}`}>수정</RouteLink>
         <RouteLink to="/post/delete">삭제</RouteLink>
         <article>
           <h3>{this.state.article.title}</h3>
