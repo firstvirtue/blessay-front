@@ -5,15 +5,21 @@ import { shadow } from 'lib/styleUtils';
 import { Link } from 'react-router-dom';
 
 const Positioner = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+`;
+
+const Wrapper = styled.div`
   margin-top: 10rem;
-  margin-left: 20px;
-  margin-right: 20px;
-  
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const PostWrapper = ({children}) => (
   <Positioner>
-    {children}
+    <Wrapper>
+      {children}
+    </Wrapper>
   </Positioner>
 );
 

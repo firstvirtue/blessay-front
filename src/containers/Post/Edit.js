@@ -31,7 +31,8 @@ class Edit extends Component {
       outputData.blocks.forEach(el => {
 
         const item = {
-          content: JSON.stringify(el.data),
+          type: el.type,
+          content: el.data.text,
           created_on: new Date().toISOString(),
           updated_on: new Date().toISOString()
         }
@@ -40,6 +41,7 @@ class Edit extends Component {
 
       const data = {
         title: storedTitle,
+        description: '',
         blocks: blocks
       }
 

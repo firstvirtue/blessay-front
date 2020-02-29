@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { shadow } from 'lib/styleUtils';
 
 const Aligner = styled.div`
+  display: inline-block;
   margin-top: 1rem;
   text-align: right;
 `;
