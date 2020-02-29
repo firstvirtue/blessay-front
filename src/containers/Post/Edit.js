@@ -1,28 +1,53 @@
 import React, { Component } from 'react';
-import { PostWrapper, RouteLink, PostButton } from 'components/Post';
+import { PostWrapper, RouteLink, PostButton, PostTitle } from 'components/Post';
 import EditorJS from '@editorjs/editorjs';
+import axios from 'axios';
 
 class Edit extends Component {
   constructor(props) {
     super(props);
 
-    const editor = new EditorJS({
+    this.state = {
+      title: '',
+      storedTitle: ''
+    }
+
+    this.editor = new EditorJS({
       holderId: 'container',
-      autofocus: true,
+      // autofocus: true,
     });
   }
 
   handleSave = async () => {
-    alert(1);
+    // this.editor.focus();
+
+    this.editor.save().then((outputData) => {
+      // console.log(outputData);
+      console.log(this.state);
+      // axios.post('/api/posts/', )
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+
+  handleChange = (e) => {
+    // console.log(e.target.textContent);
+    
+    // TODO: placeholder
+    this.setState({ storedTitle: e.target.textContent });
   }
 
   render() {
-    const { handleSave } = this;
+    const { handleSave, handleChange } = this;
+    const { title } = this.state;
+
+    console.log(title);
 
     return (
       <PostWrapper>
         <PostButton onClick={handleSave}>저장하기</PostButton>
         <RouteLink to="/post/list">취소하기</RouteLink>
+        <PostTitle html={title} onChange={handleChange}></PostTitle>
         <div id="container"></div>
       </PostWrapper>
     );
