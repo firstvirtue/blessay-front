@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { PostWrapper, RouteLink, PostButton, PostTitle } from 'components/Post';
 import EditorJS from '@editorjs/editorjs';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Edit extends Component {
   constructor(props) {
@@ -65,14 +67,19 @@ class Edit extends Component {
     }
   }
 
+  notify = (message) => toast(message.toString());
+
   handleSave = async () => {
+    
     // this.editor.focus();
+    const { notify } = this;
     const { param } = this.state;
 
     await this.editor.save().then((outputData) => {
       console.log(outputData);
       const { storedTitle } = this.state;
       const { history } = this.props;
+      
 
       const blocks = [];
 
@@ -101,6 +108,7 @@ class Edit extends Component {
   
         }).catch((e) => {
           console.log(e);
+          notify('연결에 실패했습니다.');
         });
       } else {
         axios.post('/api/posts/', data).then((e) => {
@@ -108,6 +116,7 @@ class Edit extends Component {
   
         }).catch((e) => {
           console.log(e);
+          notify('연결에 실패했습니다.');
         });
       }
 
@@ -133,6 +142,7 @@ class Edit extends Component {
         <RouteLink to="/post/list">취소하기</RouteLink>
         <PostTitle html={title} onChange={handleChange}></PostTitle>
         <div id="container"></div>
+        <ToastContainer/>
       </PostWrapper>
     );
   }
