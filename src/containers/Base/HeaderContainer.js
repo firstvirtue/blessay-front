@@ -6,10 +6,13 @@ import { bindActionCreators } from 'redux';
 import storage from 'lib/storage';
 
 class HeaderContainer extends Component {
-  // constructor() {
-  //   super();
-  //   console.log('header');
-  // }
+  constructor() {
+    super();
+    
+    this.state = {
+      userLayerVisibility: false
+    }
+  }
 
   handleLogout = async () => {
     const { UserActions } = this.props;
@@ -23,6 +26,11 @@ class HeaderContainer extends Component {
     window.location.href = '/';
   }
 
+  handleUserLayer = () => {
+    const { userLayerVisibility } = this.state;
+    this.setState({userLayerVisibility: !userLayerVisibility});
+  }
+
   render() {
     const { visible, user } = this.props;
     if(!visible) return null;
@@ -31,8 +39,10 @@ class HeaderContainer extends Component {
       <Header>
         { user.get('logged') 
           ? (<div>
+            <div onClick={this.handleUserLayer}>
             { user.getIn(['loggedInfo', 'username'])}
-            <UserLayer>
+            </div>
+            <UserLayer userLayerVisibility={this.state.userLayerVisibility}>
               <div>내 정보</div>
               <div onClick={this.handleLogout}>(로그아웃)</div>
             </UserLayer>

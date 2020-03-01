@@ -6,11 +6,11 @@ const Wrapper = styled.div`
   width: 100%;
   min-height: 100px;
   background: gray;
-
+  visibility: ${(props) => props.userLayerVisibility ? 'visible' : 'collapse'};
 `;
 
-const UserLayer = ({ children }) => (
-  <Wrapper>
+const UserLayer = ({ children, userLayerVisibility }) => (
+  <Wrapper userLayerVisibility={userLayerVisibility}>
     유저 패널
     {children}
   </Wrapper>
