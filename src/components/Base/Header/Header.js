@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow, media } from 'lib/styleUtils';
+import { Link } from 'react-router-dom';
 
 // 상단 고정, 그림자
 const Positioner = styled.div`
@@ -59,14 +60,21 @@ const GradientBorder = styled.div`
     background: linear-gradient(to right, ${oc.gray[6]}, ${oc.cyan[5]});
 `;
 
+const RootLink = styled(Link)`
+  display: block;
+  text-decoration: none;
+`;
+
 const Header = ({children}) => {
     return (
         <Positioner>
             <WhiteBackground>
                 <HeaderContents>
+                  <RootLink to="/">
                     <Logo>HSRCH</Logo>
-                    <Spacer/>
-                    {children}
+                  </RootLink>
+                  <Spacer/>
+                  {children}
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>

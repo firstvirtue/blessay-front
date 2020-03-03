@@ -9,7 +9,7 @@ const Aligner = styled.div`
   margin-top: 1rem;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: ${oc.gray[6]};
   &:hover {
     color: ${oc.gray[7]};
@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
 
 const HeaderLink = ({to, children}) => (
   <Aligner>
-    <StyledLink to={to}>{children}</StyledLink>
+    <StyledLink href={to}>{children}</StyledLink>
   </Aligner>
 );
 
