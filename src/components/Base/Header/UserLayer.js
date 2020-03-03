@@ -11,7 +11,6 @@ const Wrapper = styled.div`
 
 const UserLayer = ({ children, userLayerVisibility }) => (
   <Wrapper userLayerVisibility={userLayerVisibility}>
-    유저 패널
     {children}
   </Wrapper>
 );

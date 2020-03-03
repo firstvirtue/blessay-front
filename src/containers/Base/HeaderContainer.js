@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header, { LoginButton, UserLayer } from 'components/Base/Header';
+import Header, { LoginButton, UserLayer, HeaderLink } from 'components/Base/Header';
 import { connect } from 'react-redux';
 import * as userActions from 'redux/modules/user';
 import { bindActionCreators } from 'redux';
@@ -43,6 +43,7 @@ class HeaderContainer extends Component {
             { user.getIn(['loggedInfo', 'username'])}
             </div>
             <UserLayer userLayerVisibility={this.state.userLayerVisibility}>
+              <HeaderLink to="/post/list">글 쓰기</HeaderLink>
               <div>내 정보</div>
               <div onClick={this.handleLogout}>(로그아웃)</div>
             </UserLayer>
