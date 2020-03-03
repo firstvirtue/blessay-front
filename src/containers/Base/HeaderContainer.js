@@ -43,8 +43,9 @@ class HeaderContainer extends Component {
             { user.getIn(['loggedInfo', 'username'])}
             </div>
             <UserLayer userLayerVisibility={this.state.userLayerVisibility}>
-              <HeaderLink to="/post/list">글 쓰기</HeaderLink>
-              <div>내 정보</div>
+              <HeaderLink to="/post/edit">글 쓰기</HeaderLink>
+              <HeaderLink to="/post/list">나의 글</HeaderLink>
+              <HeaderLink to="/user">내 정보</HeaderLink>
               <div onClick={this.handleLogout}>(로그아웃)</div>
             </UserLayer>
           </div>)

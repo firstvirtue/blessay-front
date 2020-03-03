@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: absolute;
-  width: 100%;
+  width: 200px;
   min-height: 100px;
   background: gray;
   visibility: ${(props) => props.userLayerVisibility ? 'visible' : 'collapse'};

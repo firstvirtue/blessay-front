@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import { shadow } from 'lib/styleUtils';
 
 const Aligner = styled.div`
-  display: inline-block;
+  display: block;
   margin-top: 1rem;
-  text-align: right;
 `;
 
 const StyledLink = styled(Link)`
